@@ -59,6 +59,12 @@ def main():
     print("----------------")
 
     X,Y=collect_values()
+    
+    #normalization
+    mean_x=np.mean(X[:,1])
+    std_x=np.std(X[:,1])
+    X[:,1]=(X[:,1]-mean_x)/std_x
+    
     if len(X)==0 or len(Y)==0:
         print("No values entered in X or Y.")
         return
@@ -75,9 +81,10 @@ def main():
 
     print("-----------------------\n")
     req_x=float(input("Enter value of X for which to predict value of Y:"))
+    normalized_req_x = (req_x - mean_x) / std_x
 
     #new hypothesis
-    calc_y = theta[0]+(req_x*theta[1])
+    calc_y = theta[0]+(normalized_req_x*theta[1])
     print("\nCalculated value of Y is:", calc_y)
 
     
@@ -86,7 +93,7 @@ def main():
     x_plot = np.linspace(min(X[:, 1]) - 1, max(X[:, 1]) + 1, 100)
     y_plot = theta[0]+(theta[1]*x_plot)
     mat.plot(x_plot, y_plot, color='blue')
-    mat.scatter([req_x], [calc_y], color='green', s=100, label='Prediction Value (%.4f)' % calc_y)
+    mat.scatter([normalized_req_x], [calc_y], color='green', s=100, label='Prediction Value (%.4f)' % calc_y)
     mat.title("Linear Regression")
     mat.xlabel("X")
     mat.ylabel("Y")

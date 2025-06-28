@@ -81,7 +81,7 @@ def main():
 
     print("-----------------------\n")
     req_x=float(input("Enter value of X for which to predict value of Y:"))
-    normalized_req_x = (req_x - mean_x) / std_x
+    normalized_req_x=(req_x - mean_x)/std_x
 
     #new hypothesis
     calc_y = theta[0]+(normalized_req_x*theta[1])
@@ -89,16 +89,20 @@ def main():
 
     
     #matpplotlib time woohooo
-    mat.scatter(X[:, 1], Y, label='Training Data', color='black')
-    x_plot = np.linspace(min(X[:, 1]) - 1, max(X[:, 1]) + 1, 100)
-    y_plot = theta[0]+(theta[1]*x_plot)
-    mat.plot(x_plot, y_plot, color='blue')
-    mat.scatter([normalized_req_x], [calc_y], color='green', s=100, label='Prediction Value (%.4f)' % calc_y)
-    mat.title("Linear Regression")
-    mat.xlabel("X")
-    mat.ylabel("Y")
-    mat.legend()
-    mat.grid(True)
-    mat.show()
+    #X_original=X[:,1]*std_x+mean_x
+    #mat.scatter(X[:, 1], Y, label='Training Data', color='black')
+    #x_plot=np.linspace(min(X_original)-1, max(X_original)+1, 100)
+    #x_plot_normalized=(x_plot-mean_x)/std_x
+    #y_plot= theta[0]+(theta[1]*x_plot_normalized)
+    #mat.plot(x_plot, y_plot, color='blue')
+    #mat.scatter([req_x], [calc_y], color='green', s=100, label='Prediction Value (%.4f)' % calc_y)
+    #mat.title("Linear Regression")
+    #mat.xlabel("X")
+    #mat.ylabel("Y")
+    #mat.legend()
+    #mat.grid(True)
+    #mat.show()
+
+    #uhhh i couldnt get these to work lmao^^
     
 main()

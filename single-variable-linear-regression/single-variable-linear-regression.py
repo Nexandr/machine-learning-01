@@ -68,16 +68,16 @@ def main():
     iterations = int(get_values_float("\nEnter number of iterations:"))
     theta=np.zeros(2)
     for i in range(0,iterations):
-        theta_upd=gradient_descent(X, Y, theta, alpha)
+        theta=gradient_descent(X, Y, theta, alpha)
 
     print("\nCalculated Parameters Are:")
-    print("\n", theta_upd)
+    print("\n", theta)
 
     print("-----------------------\n")
     req_x=float(input("Enter value of X for which to predict value of Y:"))
 
     #new hypothesis
-    calc_y = theta_upd[0]+(req_x*theta_upd[1])
+    calc_y = theta[0]+(req_x*theta[1])
     print("\nCalculated value of Y is:", calc_y)
 
     

@@ -19,7 +19,7 @@ this was... an experience
 
 ---
 
-## 🛠 What does the code do?
+## What does the code do?
 
 Takes a series of (x, y) input pairs from the user  
 Trains a regression model using one of the three methods above  
@@ -28,7 +28,7 @@ In the LWR version, adjusts the prediction dynamically using a `tau` value (band
 
 ---
 
-## 📚 What libraries does it use?
+## What libraries does it use?
 
 - Just **NumPy**
 - There's some **matplotlib** commented out somewhere... dont ask me about it

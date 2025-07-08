@@ -1,14 +1,36 @@
-My first ML project I think?
+# UNIVARIATE REGRESSION MODELS
+yea most of them are just univariate regression models ahaha yeah thats it
 
-Its just a simple single variable linear regression model I made when I first discovered what gradient descent meant. Apparently you can use vectorization but I did not understand how that worked so I did it using iterative algebra.
 
-Update: added a vectorization version as well yippie
+---
 
-## What does this code do?
-takes a series of (x,y) pairs, learning rate, and iterations to be done, trains itself on that data for said amount of iterations, is able to predict the values of other data
+## Projects in This Repo
 
-## What libraries does it use?
-only numpy. it has matplotlib but the matplotlib code is commented out i couldnt debug it
+### 1. `linear_regression.py`
+simple single variable linear regression model built through iterative loops because vectors are scary
 
-## How to run it?
-python
+### 2. `vectorized_linear_regression.py`
+vectors aint so scary anymore are they (spent half of my braincells during debugging yes they definately are in python atleast)
+
+### 3. `locally_weighted_linear_regression.py`
+basically linear regression but instead of global parameters this calculates local parameters based upon the closeness of the position relative to queried x.
+
+this was... an experience
+
+---
+
+## 🛠 What does the code do?
+
+Takes a series of (x, y) input pairs from the user  
+Trains a regression model using one of the three methods above  
+Asks for a new input and predicts the corresponding output value  
+In the LWR version, adjusts the prediction dynamically using a `tau` value (bandwidth)
+
+---
+
+## 📚 What libraries does it use?
+
+- Just **NumPy**
+- There's some **matplotlib** commented out somewhere... dont ask me about it
+
+---

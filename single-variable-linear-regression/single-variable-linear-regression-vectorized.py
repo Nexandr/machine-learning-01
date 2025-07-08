@@ -41,7 +41,7 @@ def gradient_descent(X, Y, theta, alpha):
   pred=pred_fn(X,theta)
   error=pred-Y
   grad=(1/len(X))*(X.T @ error)
-  theta-=alpha*gradient
+  theta-=alpha*grad
   return theta
 
 #main where all the fun stuff happens

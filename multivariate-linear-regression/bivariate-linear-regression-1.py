@@ -66,6 +66,18 @@ def pred_input(mean_x, std_x, theta):
 def normalize(features, mean_x, std_x):
     return (features - mean_x) / (std_x + 1e-8)
 
+def denormalize(theta, mean_x, std_x):
+    denorm_theta = np.zeros(3)
+    denorm_theta[1:] = theta[1:]/(std_x + 1e-8)
+    denorm_theta[0] = theta[0] - (theta[1:]@(mean_x/(std_x + 1e-8)))
+    return denorm_theta
+
+def loss(X, Y, theta):
+    predictions = pred_fn(X, theta)
+    errors = predictions - Y
+    loss = np.mean(errors**2)
+    return loss
+
 #main where all the fun stuff happens
 def main():
     print("\n----------------\nGradient Descent\n----------------")
@@ -113,14 +125,23 @@ def main():
     theta=np.zeros(3)
     for i in range(0,iterations):
         theta=gradient_descent(X, Y, theta, alpha)
+        if i % max(1,round(iterations/4)) == 0 or i == iterations-1:
+            iteration_loss = loss(X, Y, theta)
+            print(f"Loss in iteration #{i} is {iteration_loss:.2f}")
+    print(f"Final Loss is: {loss(X, Y, theta):.4f}")
+            
     if not np.all(np.isfinite(theta)):
         print("\nGradient diverging. Consider using smaller alpha for useful iterations. (Diverging gradients can cause infinities or NaNs!)")
         return
 
     print("\nCalculated Hypothesis is:")
+    denorm_theta = denormalize(theta, mean_x, std_x)
     #no this does not spawn multiple eldritch entities, it prints out the function
-    print(f"\nH(x) = {f'{theta[0]:.2f}'.rstrip('0').rstrip('.')} + {f'{theta[1]:.2f}'.rstrip('0').rstrip('.')}\u22c5x\u2081 + {f'{theta[2]:.2f}'.rstrip('0').rstrip('.')}\u22c5x\u2082")
-    print(f"The value of parameters are: {theta[0]:.8f}, {theta[1]:.8f}, {theta[2]:.8f}")
+    print(f"\nH(x) = {f'{denorm_theta[0]:.2f}'.rstrip('0').rstrip('.')} + {f'{denorm_theta[1]:.2f}'.rstrip('0').rstrip('.')}\u22c5x\u2081 + {f'{denorm_theta[2]:.2f}'.rstrip('0').rstrip('.')}\u22c5x\u2082")
+    print(f"The value of parameters are: {denorm_theta[0]:.8f}, {denorm_theta[1]:.8f}, {denorm_theta[2]:.8f}")
+
+    #MSE i learnt yesterday
+    
     while True:
         pred_key=input('-----------------------\nStart prediction?: (Yes/No or Y/N)')
         if pred_key.lower()=='yes' or pred_key.lower()=='y':
@@ -140,61 +161,3 @@ while True:
         break
     else:
         print('Please enter either "Yes/No" or "Y/N".')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#i spend unhealthy amounts of time coding linear regression algorithms, its crazy how i haven't gone insane yet... or maybe i have idk
